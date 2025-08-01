@@ -624,18 +624,19 @@
         </div>
         <div class="contact-form">
           <h3>Send Us a Message</h3>
-          <form>
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email" required>
-            <input type="text" placeholder="Subject">
-            <textarea placeholder="Your Message" required></textarea>
-            <button type="submit" class="btn">Send Message</button>
-          </form>
+          <form id="contact-form">
+  <input type="text" name="name" placeholder="Your Name" required>
+  <input type="email" name="email" placeholder="Your Email" required>
+  <input type="text" name="subject" placeholder="Subject">
+  <textarea name="message" placeholder="Your Message" required></textarea>
+  <button type="submit" class="btn">Send Message</button>
+</form>
         </div>
       </div>
     </div>
   </section>
-
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <!-- Footer -->
   <footer>
     <div class="container">
@@ -646,6 +647,22 @@
   </footer>
 
   <script>
+    // Initialize EmailJS
+  emailjs.init("nt09Mrpqc0GR-9_Zh"); // Your Public Key
+
+  // Form Submission Handler
+  const form = document.getElementById("contact-form");
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    emailjs.sendForm("service_u1ig06r", "template_crp2ji4", this)
+      .then(function () {
+        alert("✅ Message sent successfully!");
+        form.reset();
+      }, function (error) {
+        alert("❌ Failed to send message: " + error.text);
+      });
+  });
     // Simple JavaScript for category filtering
     document.addEventListener('DOMContentLoaded', function () {
       const categoryBtns = document.querySelectorAll('.category-btn');
