@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summer Collection - Dampy Brothers</title>
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
+        .header-btn {
+            padding: 10px 20px;
+            background-color: white;
+            color: #ff6b81;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .header-btn:hover {
+            background-color: #ff6b81;
+            color: white;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 15px 0;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover {
+            color: #ff6b81;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: url('https://images.unsplash.com/photo-1519046904884-53103b34b206?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        .btn {
+            display: inline-block;
+            background-color: #ff6b81;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #ff4757;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Featured Products */
+        .featured-products {
+            padding: 80px 0;
+            background-color: white;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            color: #333;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+        .product-image {
+            height: 250px;
+            overflow: hidden;
+        }
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+        .product-info {
+            padding: 20px;
+        }
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .current-price {
+            color: #ff6b81;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .original-price {
+            text-decoration: line-through;
+            color: #777;
+            font-size: 0.9rem;
+        }
+        .discount-badge {
+            background-color: #ff6b81;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+        }
+
+        /* Collection Highlights */
+        .collection-highlights {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+        }
+        .highlight-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+        .highlight-card {
+            flex: 1;
+            min-width: 300px;
+            max-width: 350px;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .highlight-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        .highlight-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .highlight-content {
+            padding: 25px;
+            text-align: center;
+        }
+        .highlight-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .highlight-desc {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        /* Offers Section */
+        .offers {
+            padding: 80px 0;
+            background-color: white;
+        }
+        .offer-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+        .offer-card {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            border-radius: 10px;
+            padding: 30px;
+            color: white;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .offer-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        .offer-desc {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        .coupon-code {
+            background-color: white;
+            color: #ff6b81;
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .countdown {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 20px;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+        }
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .testimonial-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        .rating {
+            color: #ffb400;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: #555;
+        }
+        .customer-name {
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 50px 0 30px;
+        }
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-logo {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .footer-about p {
+            margin-bottom: 20px;
+            color: #aaa;
+        }
+        .social-links a {
+            display: inline-block;
+            margin-right: 15px;
+            color: white;
+            font-size: 1.5rem;
+        }
+        .footer-links h3, .footer-contact h3, .newsletter h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+        .footer-links ul {
+            list-style: none;
+        }
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover {
+            color: #ff6b81;
+        }
+        .contact-info {
+            color: #aaa;
+            margin-bottom: 15px;
+        }
+        .newsletter input {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+        }
+        .newsletter button {
+            background-color: #ff6b81;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #444;
+            color: #aaa;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .search-bar {
+                max-width: 100%;
+                margin: 20px 0;
+            }
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            nav ul li {
+                margin: 5px 0;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">Dampy Brothers</div>
+            <div class="header-actions">
+                <button class="header-btn">WhatsApp</button>
+                <button class="header-btn">Explore Collection</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">New Collection</a></li>
+                <li><a href="#">Offers</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Beat the Heat with Our Cool Summer Collection!</h1>
+            <p>Fresh colors and comfortable fabrics designed for your summer adventures</p>
+            <a href="#featured" class="btn">Shop Now</a>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured-products" id="featured">
+        <div class="container">
+            <h2 class="section-title">Summer Essentials</h2>
+            <div class="product-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Cotton T-Shirt">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Cotton Graphic T-Shirt</h3>
+                        <div class="product-price">
+                            <span class="current-price">₹499</span>
+                            <span class="original-price">₹999</span>
+                            <span class="discount-badge">50% OFF</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1598033129183-c4f50c736f10?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Linen Pants">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Linen Summer Pants</h3>
+                        <div class="product-price">
+                            <span class="current-price">₹899</span>
+                            <span class="original-price">₹1,299</span>
+                            <span class="discount-badge">30% OFF</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Beach Shirt">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Floral Beach Shirt</h3>
+                        <div class="product-price">
+                            <span class="current-price">₹699</span>
+                            <span class="original-price">₹999</span>
+                            <span class="discount-badge">30% OFF</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1595341595379-cf0f13c6d7a8?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Summer Shorts">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Casual Summer Shorts</h3>
+                        <div class="product-price">
+                            <span class="current-price">₹599</span>
+                            <span class="original-price">₹799</span>
+                            <span class="discount-badge">25% OFF</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collection Highlights -->
+    <section class="collection-highlights">
+        <div class="container">
+            <h2 class="section-title">Trending Summer Styles</h2>
+            <div class="highlight-cards">
+                <!-- Highlight 1 -->
+                <div class="highlight-card">
+                    <div class="highlight-image">
+                        <img src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Beach Wear">
+                    </div>
+                    <div class="highlight-content">
+                        <h3 class="highlight-title">Beach Wear</h3>
+                        <p class="highlight-desc">Floral prints and off-shoulder dresses perfect for beach vacations</p>
+                        <a href="#" class="btn">View Collection</a>
+                    </div>
+                </div>
+                <!-- Highlight 2 -->
+                <div class="highlight-card">
+                    <div class="highlight-image">
+                        <img src="https://images.unsplash.com/photo-1527719327859-c6ce80353573?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Casual Weekend">
+                    </div>
+                    <div class="highlight-content">
+                        <h3 class="highlight-title">Casual Weekend</h3>
+                        <p class="highlight-desc">Comfortable shorts and tank tops for your relaxed weekends</p>
+                        <a href="#" class="btn">View Collection</a>
+                    </div>
+                </div>
+                <!-- Highlight 3 -->
+                <div class="highlight-card">
+                    <div class="highlight-image">
+                        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Sun Protection">
+                    </div>
+                    <div class="highlight-content">
+                        <h3 class="highlight-title">Sun Protection</h3>
+                        <p class="highlight-desc">Hats and light jackets to protect you from the summer sun</p>
+                        <a href="#" class="btn">View Collection</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Offers Section -->
+    <section class="offers">
+        <div class="container">
+            <h2 class="section-title">Summer Special Offers</h2>
+            <div class="offer-cards">
+                <!-- Offer 1 -->
+                <div class="offer-card">
+                    <h3 class="offer-title">Buy 3 Get 1 Free</h3>
+                    <p class="offer-desc">Mix and match any 4 summer items and pay for only 3</p>
+                    <div class="coupon-code">SUMMERBOGO</div>
+                    <a href="#" class="btn">Shop Now</a>
+                </div>
+                <!-- Offer 2 -->
+                <div class="offer-card">
+                    <h3 class="offer-title">30% Off First Order</h3>
+                    <p class="offer-desc">Use code below to get 30% off your first summer purchase</p>
+                    <div class="coupon-code">SUMMER30</div>
+                    <div class="countdown">Offer ends in 48:00:00</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <div class="testimonial-grid">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card">
+                    <div class="rating">★★★★★</div>
+                    <p class="testimonial-text">"The quality is excellent and so comfortable in the summer heat. I've already bought three colors!"</p>
+                    <div class="customer-name">- Rahul Sharma</div>
+                </div>
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card">
+                    <div class="rating">★★★★☆</div>
+                    <p class="testimonial-text">"Perfect for beach vacations. The fabric is light and dries quickly after swimming."</p>
+                    <div class="customer-name">- Priya Patel</div>
+                </div>
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card">
+                    <div class="rating">★★★★★</div>
+                    <p class="testimonial-text">"Great value for money. The summer collection has become my go-to for daily wear."</p>
+                    <div class="customer-name">- Amit Kumar</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <div class="footer-logo">Dampy Brothers</div>
+                    <p>Quality fashion for kids and gentlemen since 2010. Our summer collection is designed to keep you cool and stylish.</p>
+                    <div class="social-links">
+                        <a href="#"><i>📱</i></a>
+                        <a href="#"><i>📷</i></a>
+                        <a href="#"><i>🔵</i></a>
+                        <a href="#"><i>🐦</i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Return Policy</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Care Instructions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <div class="contact-info">123 Fashion Street, City Center</div>
+                    <div class="contact-info">+91 98765 43210</div>
+                    <div class="contact-info">info@dampybrothers.com</div>
+                </div>
+                <div class="newsletter">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe for summer special offers</p>
+                    <input type="email" placeholder="Your email address">
+                    <button>Subscribe</button>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 Dampy Brothers. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Countdown Timer
+        function updateCountdown() {
+            const endTime = new Date();
+            endTime.setHours(endTime.getHours() + 48); // 48 hours from now
+            
+            const now = new Date();
+            const diff = endTime - now;
+            
+            if (diff <= 0) {
+                document.querySelector('.countdown').textContent = "Offer expired!";
+                return;
+            }
+            
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.querySelector('.countdown').textContent = 
+                `Offer ends in ${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
